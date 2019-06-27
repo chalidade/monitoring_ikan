@@ -34,6 +34,8 @@
     <script src="js/main.js"></script>
     <script src="js/swiper.js"></script>
     <script src="js/swiper.min.js"></script>
+    <script src="js/Chart.js"></script>
+    <script src="js/vendor/bootstrap.min.js"></script>
     <script type="text/javascript">
     var mySwiper = new Swiper ('.swiper-container');
     </script>

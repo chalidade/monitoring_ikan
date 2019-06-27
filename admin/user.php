@@ -21,83 +21,97 @@
           <th>Nama</th>
           <th>Jumlah Ikan</th>
         </tr>
+        <?php
+        include "proses/koneksi.php";
+         $no    = 1;
+         $kolam = mysqli_query($connect, "SELECT * FROM `kolam` ORDER BY `kolam`.`no` DESC");
+         while ($data = mysqli_fetch_array($kolam)) {
+        ?>
         <tr>
-          <td>1</td>
-          <td><a data-toggle="modal" data-target="#myModal">Kolam 1</a></td>
-          <td>100 ekor</td>
+          <td><?php echo $no;$no++; ?></td>
+          <td>
+            <a data-toggle="modal" data-target="#myModal<?php echo $data['no']; ?>"><?php echo $data['nama']; ?></a>
+            <div class="modal fade" id="myModal<?php echo $data['no']; ?>" role="dialog">
+            <div class="modal-dialog">
+
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Detail Kolam</h4>
+                </div>
+                <div class="modal-body">
+                  <table width="100%">
+                    <tr>
+                      <td width="40%">Nama </td>
+                      <td>: <?php echo $data['nama']; ?></td>
+                    </tr>
+                    <tr>
+                      <td width="40%">Tanggal </td>
+                      <td>: <?php echo $data['tanggal']; ?></td>
+                    </tr>
+                    <tr>
+                      <td>Ikan Masuk</td>
+                      <td>: <?php echo $data['ikan_masuk']; ?> ekor</td>
+                    </tr>
+                    <tr>
+                      <td>Ikan Mati</td>
+                      <td>: <?php echo $data['ikan_mati']; ?> ekor</td>
+                    </tr>
+                    <tr>
+                      <td>Ikan Terjual</td>
+                      <td>: <?php echo $data['ikan_terjual']; ?> ekor</td>
+                    </tr>
+                    <tr>
+                      <td>Total Ikan </td>
+                      <td>: <?php echo $data['total_ikan']; ?> ekor</td>
+                    </tr>
+                  </table>
+                  <hr>
+                  <form action="proses/kolam.php?id=ubahdata&data=<?php echo $data['no']; ?>" method="post">
+                  <table width="100%">
+                    <tr>
+                      <td colspan="2"><h5><b style="color:#000">Tambah Data</b></h5><hr></td>
+                    </tr>
+                    <tr>
+                      <td width="40%">Ikan Baru </td>
+                      <td>
+                        <input type="text" class="form-control" name="baru" value="">
+                        <input type="hidden" name="total" value="<?php echo $data['total_ikan']; ?> ">
+                       </td>
+                    </tr>
+                    <tr>
+                      <td width="40%">Ikan Mati </td>
+                      <td><input type="text" class="form-control" name="mati" value=""> </td>
+                    </tr>
+                    <tr>
+                      <td>Ikan Terjual</td>
+                      <td><input type="text" class="form-control" name="terjual" value=""> </td>
+                    </tr>
+                    <tr>
+                      <td colspan="2">
+                      <input type="submit" style="width:100%" class="btn btn-primary" value="Simpan Data">
+                      <a href="proses/kolam.php?id=hapus&data=<?php echo $data['no']; ?>" class="btn btn-danger" style="margin-top:10px;width:100%">Hapus</a>
+                      </td>
+                    </tr>
+                  </table>
+                </form>
+                </div>
+                <div class="modal-footer">
+                </div>
+              </div>
+            </div>
+            </div>
+          </td>
+          <td><?php echo $data['total_ikan']; ?></td>
         </tr>
-        <tr>
-          <td>2</td>
-          <td><a data-toggle="modal" data-target="#myModal">Kolam 2</a></td>
-          <td>150 ekor</td>
-        </tr>
+      <?php } ?>
       </table>
     </div>
     <div class="col-md-12" style="margin-top:20px">
       <button type="button" data-toggle="modal" data-target="#adduser" class="btn btn-success" name="button" style="width:100%">Tambah Kolam</button>
     </div>
     </div>
-  </div>
-<!-- Modal -->
-<div class="modal fade" id="myModal" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Detail Kolam</h4>
-      </div>
-      <div class="modal-body">
-        <table width="100%">
-          <tr>
-            <td width="40%">Nama </td>
-            <td>: Kolam 1</td>
-          </tr>
-          <tr>
-            <td>Ikan Masuk</td>
-            <td>: 100 ekor</td>
-          </tr>
-          <tr>
-            <td>Ikan Mati</td>
-            <td>: 10 ekor</td>
-          </tr>
-          <tr>
-            <td>Ikan Terjual</td>
-            <td>: 10 ekor</td>
-          </tr>
-          <tr>
-            <td>Total Ikan </td>
-            <td>: 80 ekor</td>
-          </tr>
-        </table>
-        <hr>
-        <table width="100%">
-          <tr>
-            <td colspan="2"><h5><b style="color:#000">Tambah Data</b></h5><hr></td>
-          </tr>
-          <tr>
-            <td width="40%">Ikan Baru </td>
-            <td><input type="text" class="form-control" name="baru" value=""> </td>
-          </tr>
-          <tr>
-            <td width="40%">Ikan Mati </td>
-            <td><input type="text" class="form-control" name="mati" value=""> </td>
-          </tr>
-          <tr>
-            <td>Ikan Terjual</td>
-            <td><input type="text" class="form-control" name="terjual" value=""> </td>
-          </tr>
-          <tr>
-            <td colspan="2"><br><input type="submit" style="width:100%" class="btn btn-primary" value="Simpan Data"> </td>
-          </tr>
-        </table>
-      </div>
-      <div class="modal-footer">
-        <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
-      </div>
-    </div>
-  </div>
   </div>
 
   <div class="modal fade" id="adduser" role="dialog">
@@ -109,6 +123,7 @@
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title">Tambah Kolam</h4>
         </div>
+        <form class="" action="proses/kolam.php?id=tambah" method="post">
         <div class="modal-body">
           <table>
             <tr>
@@ -121,13 +136,17 @@
             </tr>
             <tr>
               <td>Tanggal</td>
-              <td><input type="text" disabled name="tanggal" value="<?php echo date('d/m/Y'); ?>" class="form-control"></td>
+              <td>
+                <input type="text" disabled value="<?php echo date('d/m/Y'); ?>" class="form-control">
+                <input type="hidden" name="tanggal" value="<?php echo date('d/m/Y'); ?>" class="form-control">
+              </td>
             </tr>
           </table>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-success" data-dismiss="modal" style="width:100%">Simpan</button>
+          <button type="submit" class="btn btn-success" style="width:100%">Simpan</button>
         </div>
+      </form>
       </div>
     </div>
     </div>

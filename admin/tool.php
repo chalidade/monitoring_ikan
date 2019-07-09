@@ -32,10 +32,37 @@
   new Chart(document.getElementById("pie-chart"), {
   type: 'line',
   data: {
-    labels: ["a", "b", "c", "d", "e", "f", "g"],
+    labels: [
+      <?php
+      include "proses/koneksi.php";
+      $no = 1;
+      $level = mysqli_query($connect, "SELECT * FROM `monitoring_air` ORDER BY `monitoring_air`.`id` DESC LIMIT 10");
+      while ($lv   = mysqli_fetch_array($level)) {
+             $date = $lv['tanggal'];
+             echo '"'.$date.'"';
+             if ($no < 10 ) {
+               echo ", ";
+             }
+             $no++;
+        }
+        ?>
+    ],
     datasets: [{
       backgroundColor: ["#0bb84e"],
-      data: [85,5,10,30,40,50,10]
+      data: [
+        <?php
+        $no = 1;
+        $level = mysqli_query($connect, "SELECT * FROM `monitoring_air` ORDER BY `monitoring_air`.`id` DESC LIMIT 10");
+        while ($lv   = mysqli_fetch_array($level)) {
+               $date = $lv['level'];
+               echo $date;
+               if ($no < 10 ) {
+                 echo ", ";
+               }
+               $no++;
+          }
+          ?>
+      ]
     }]
   },
   options: {
@@ -49,10 +76,36 @@
   new Chart(document.getElementById("pie-chart1"), {
     type: 'line',
     data: {
-      labels: ["a", "b", "c", "d", "e", "f", "g"],
+      labels: [
+        <?php
+        $no = 1;
+        $level = mysqli_query($connect, "SELECT * FROM `monitoring_air` ORDER BY `monitoring_air`.`id` DESC LIMIT 10");
+        while ($lv   = mysqli_fetch_array($level)) {
+               $date = $lv['tanggal'];
+               echo '"'.$date.'"';
+               if ($no < 10 ) {
+                 echo ", ";
+               }
+               $no++;
+          }
+          ?>
+      ],
       datasets: [{
-        backgroundColor: ["#2e84ff"],
-        data: [85,5,10,30,40,50,10]
+        backgroundColor: ["blue"],
+        data: [
+          <?php
+          $no = 1;
+          $level = mysqli_query($connect, "SELECT * FROM `monitoring_air` ORDER BY `monitoring_air`.`id` DESC LIMIT 10");
+          while ($lv   = mysqli_fetch_array($level)) {
+                 $date = $lv['suhu'];
+                 echo $date;
+                 if ($no < 10 ) {
+                   echo ", ";
+                 }
+                 $no++;
+            }
+            ?>
+        ]
       }]
     },
     options: {
@@ -66,10 +119,36 @@
   new Chart(document.getElementById("pie-chart2"), {
     type: 'line',
     data: {
-      labels: ["a", "b", "c", "d", "e", "f", "g"],
+      labels: [
+        <?php
+        $no = 1;
+        $level = mysqli_query($connect, "SELECT * FROM `monitoring_air` ORDER BY `monitoring_air`.`id` DESC LIMIT 10");
+        while ($lv   = mysqli_fetch_array($level)) {
+               $date = $lv['tanggal'];
+               echo '"'.$date.'"';
+               if ($no < 10 ) {
+                 echo ", ";
+               }
+               $no++;
+          }
+          ?>
+      ],
       datasets: [{
         backgroundColor: ["#ffb933"],
-        data: [85,5,10,30,40,50,10]
+        data: [
+          <?php
+          $no = 1;
+          $level = mysqli_query($connect, "SELECT * FROM `monitoring_air` ORDER BY `monitoring_air`.`id` DESC LIMIT 10");
+          while ($lv   = mysqli_fetch_array($level)) {
+                 $date = $lv['ph'];
+                 echo $date;
+                 if ($no < 10 ) {
+                   echo ", ";
+                 }
+                 $no++;
+            }
+            ?>
+        ]
       }]
     },
     options: {
@@ -83,10 +162,36 @@
   new Chart(document.getElementById("pie-chart3"), {
     type: 'line',
     data: {
-      labels: ["a", "b", "c", "d", "e", "f", "g"],
+      labels: [
+        <?php
+        $no = 1;
+        $level = mysqli_query($connect, "SELECT * FROM `monitoring_air` ORDER BY `monitoring_air`.`id` DESC LIMIT 10");
+        while ($lv   = mysqli_fetch_array($level)) {
+               $date = $lv['tanggal'];
+               echo '"'.$date.'"';
+               if ($no < 10 ) {
+                 echo ", ";
+               }
+               $no++;
+          }
+          ?>
+      ],
       datasets: [{
         backgroundColor: ["#fd2446"],
-        data: [85,5,10,30,40,50,10]
+        data: [
+          <?php
+          $no = 1;
+          $level = mysqli_query($connect, "SELECT * FROM `monitoring_air` ORDER BY `monitoring_air`.`id` DESC LIMIT 10");
+          while ($lv   = mysqli_fetch_array($level)) {
+                 $date = $lv['kekeruhan'];
+                 echo $date;
+                 if ($no < 10 ) {
+                   echo ", ";
+                 }
+                 $no++;
+            }
+            ?>
+        ]
       }]
     },
     options: {
